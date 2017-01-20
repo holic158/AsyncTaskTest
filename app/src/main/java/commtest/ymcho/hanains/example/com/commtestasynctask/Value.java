@@ -9,7 +9,6 @@ public class Value {
     String minimum;
     String latest;
 
-
     public String getOs() {
         return os;
     }

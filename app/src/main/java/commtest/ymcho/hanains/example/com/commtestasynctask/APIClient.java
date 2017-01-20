@@ -32,6 +32,7 @@ public class APIClient {
             //call by using HTTP URL Connection
 
             URL url = new URL(urlString);
+
             HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
 
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
@@ -39,9 +40,9 @@ public class APIClient {
 
             v = parseJSON(json);
 
-            v.setOs(os);
-            v.setMinimum(minimum);
-            v.setLatest(latest);
+//            v.setOs(os);
+//            v.setMinimum(minimum);
+//            v.setLatest(latest);
 
         } catch (MalformedURLException e) {
             System.err.println("Malformed URL");
@@ -64,19 +65,11 @@ public class APIClient {
 
     private Value parseJSON(JSONObject json) throws JSONException {
 
-        int test = 100;
-        String test1 = "";
-
         Log.d(TAG, json.toString());
 
-
-//json.opt
-
-        //json.optString();
-
         Value v = new Value();
-        v.setLatest(json.getString("minimum"));
-        v.setMinimum(json.getString("latest"));
+        v.setLatest(json.getString("latest"));
+        v.setMinimum(json.getString("minimum"));
         v.setOs(json.getString("os"));
         return v;
 
