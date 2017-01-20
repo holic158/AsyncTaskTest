@@ -20,9 +20,11 @@ public class APIClient {
 
 //    private final String TAG = APIClient.getClass().getSimpleName();
 
-    final static String APIClient = "https://fidodev.hanains.com:8443/api/v1/versions/android";
+    static String APIClient = "https://fidodev.hanains.com:8443/api/v1/versions/";
 
-    public Value getValue(String os, String minimum, String latest) {
+    public Value getValue(String param) {
+
+        APIClient += param;
 
         Value v = new Value();
 
@@ -31,7 +33,10 @@ public class APIClient {
             URL url = new URL(APIClient);
 
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
             JSONObject json = new JSONObject(getStringFromInputStream(in));
 
             v = parseJSON(json);

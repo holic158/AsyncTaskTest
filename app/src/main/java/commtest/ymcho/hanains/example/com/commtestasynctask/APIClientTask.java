@@ -29,11 +29,10 @@ public class APIClientTask extends AsyncTask<String, Void, Value> {
         APIClient client = new APIClient();
         //APIClient 객체 생성
 
-        String os = params[0];
-        String minimum = params[1];
-        String latest = params[2];
 
-        Value v = client.getValue(os,minimum,latest);
+
+
+        Value v = client.getValue(params[0]);
 
         return v;
 
@@ -42,6 +41,8 @@ public class APIClientTask extends AsyncTask<String, Void, Value> {
     @Override
     protected void onPostExecute(Value value) {
         super.onPostExecute(value);
-        httpHandler.onSuccess(value);
+//        MainActivity.value = value;
+        MainActivity.onResult(value);
+//        httpHandler.onSuccess(value);
     }
 }
