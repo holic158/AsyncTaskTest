@@ -5,10 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import commtest.ymcho.hanains.example.com.commtestasynctask.*;
-
 import java.util.concurrent.ExecutionException;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,16 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    String os = params[0];
-//    String minimum = params[1];
-//    String latest = params[2];
-
-
     public void getInformation(View view) {
 
         final TextView tem = (TextView) findViewById(R.id.tem);
-//        String x = "";
-
 
         //value 읽어오는 API 호출
         APIClientTask t = new APIClientTask(new HttpHandler() {

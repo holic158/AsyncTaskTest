@@ -4,8 +4,6 @@ package commtest.ymcho.hanains.example.com.commtestasynctask;
  * Created by hanains on 2017-01-19.
  */
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,42 +18,34 @@ import java.net.URL;
 
 public class APIClient {
 
-    private final String TAG = APIClient.getClass().getSimpleName();
-
+//    private final String TAG = APIClient.getClass().getSimpleName();
 
     final static String APIClient = "https://fidodev.hanains.com:8443/api/v1/versions/android";
+
     public Value getValue(String os, String minimum, String latest) {
+
         Value v = new Value();
-        String urlString = APIClient;
 
         try {
             //call by using HTTP URL Connection
+            URL url = new URL(APIClient);
 
-            URL url = new URL(urlString);
-
-            HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
-
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
             JSONObject json = new JSONObject(getStringFromInputStream(in));
 
             v = parseJSON(json);
 
-//            v.setOs(os);
-//            v.setMinimum(minimum);
-//            v.setLatest(latest);
-
         } catch (MalformedURLException e) {
             System.err.println("Malformed URL");
             e.printStackTrace();
             return null;
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             System.err.println("JSON pasing error");
             e.printStackTrace();
             return null;
 
-        }
-    catch(IOException e) {
+        } catch (IOException e) {
             System.err.println("URL Connection failed");
             e.printStackTrace();
             return null;
@@ -64,8 +54,6 @@ public class APIClient {
     }
 
     private Value parseJSON(JSONObject json) throws JSONException {
-
-        Log.d(TAG, json.toString());
 
         Value v = new Value();
         v.setLatest(json.getString("latest"));
@@ -78,6 +66,7 @@ public class APIClient {
     private static String getStringFromInputStream(InputStream is) {
 
         BufferedReader br = null;
+
         StringBuilder sb = new StringBuilder();
 
         String line;
@@ -87,7 +76,6 @@ public class APIClient {
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

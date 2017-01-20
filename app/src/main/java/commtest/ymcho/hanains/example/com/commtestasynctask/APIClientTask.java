@@ -24,9 +24,10 @@ public class APIClientTask extends AsyncTask<String, Void, Value> {
 
     @Override
     public Value doInBackground(String... params) {
+        //가변 배열 params
 
         APIClient client = new APIClient();
-
+        //APIClient 객체 생성
 
         String os = params[0];
         String minimum = params[1];
